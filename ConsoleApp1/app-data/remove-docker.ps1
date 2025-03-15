@@ -35,4 +35,8 @@ $newPath = ($existingPath -split ";" | Where-Object {$_ -notlike "*Docker*"} ) -
 Write-Host "Refreshing environment variables..."
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine)
 
+# Step 6: Uninstall Hyper-V and Containers features
+Write-Host "Uninstalling Hyper-V and Containers features..."
+Disable-WindowsOptionalFeature -Online -FeatureName $("Microsoft-Hyper-V", "Containers") -NoRestart
+
 Write-Host "Docker has been successfully removed from the system."

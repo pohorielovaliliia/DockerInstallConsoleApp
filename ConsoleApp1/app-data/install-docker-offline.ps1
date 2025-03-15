@@ -9,6 +9,14 @@ $helloWorldImagePath = Join-Path $PSScriptRoot "\hello-world-image.tar"
 $dockerComposePath = Join-Path $PSScriptRoot "\docker-compose-windows-x86_64.exe"
 $dockerComposeInstallPath = "$Env:ProgramFiles\docker\docker-compose.exe"
 
+# Step 0: Enable Hyper-V and Containers features
+Write-Host "`n================================================" -ForegroundColor Cyan
+Write-Host " STEP 0: Enable Hyper-V and Containers features " -ForegroundColor Yellow
+Write-Host "================================================`n" -ForegroundColor Cyan
+Write-Host "Enabling Hyper-V and Containers features..."
+Enable-WindowsOptionalFeature -Online -FeatureName $("Microsoft-Hyper-V", "Containers") -All -NoRestart
+Write-Host "Hyper-V and Containers features were enabled" -ForegroundColor Green
+
 # Step 1: Extract the Docker binary to Program Files
 Write-Host "`n====================================" -ForegroundColor Cyan
 Write-Host " STEP 1: Extract Docker binaries " -ForegroundColor Yellow
@@ -82,4 +90,13 @@ Write-Host "============================================`n" -ForegroundColor Cya
 Write-Host "Refreshing environment variables..."
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine)
 Write-Host "Docker installation completed successfully!" -ForegroundColor Green
+
+# Restart the computer
+Write-Host "`n============================================" -ForegroundColor Cyan
+Write-Host " WARNING: RESTARTING COMPUTER " -ForegroundColor Yellow
+Write-Host "============================================`n" -ForegroundColor Cyan
+Write-Host "Restarting in 10 seconds..."
+Start-Sleep -Seconds 10
+Restart-Computer -Force
+
 
