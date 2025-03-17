@@ -13,6 +13,6 @@ Full documentation can be found at [Docker Offline - Docker Installation](https:
 5. Machine is ready for Docker usage.
 
 ### Screenshots
-![](./ConsoleApp1/screenshots/demo-0.png)
-![](./ConsoleApp1/screenshots/demo-1.png)
-![](./ConsoleApp1/screenshots/demo-2.png)
+![](./screenshots/demo-0.png)
+![](./screenshots/demo-1.png)
+![](./screenshots/demo-2.png)
