@@ -1,4 +1,4 @@
-﻿# Docker Installation Console Application
+# Docker Installation Console Application
 This repository contains scripts and other files required for creating an executable application for Docker installation.
 
 ## Documentation
@@ -13,6 +13,6 @@ Full documentation can be found at [Docker Offline - Docker Installation](https:
 5. Machine is ready for Docker usage.
 
 ### Screenshots
-![](./screenshots/demo-0.png)
-![](./screenshots/demo-1.png)
-![](./screenshots/demo-2.png)
+![](./ConsoleApp1/screenshots/demo-0.png)
+![](./ConsoleApp1/screenshots/demo-1.png)
+![](./ConsoleApp1/screenshots/demo-2.png)
