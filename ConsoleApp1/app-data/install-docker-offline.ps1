@@ -3,7 +3,7 @@
 # =====================================================================================
 
 # Define the path to the downloaded Docker zip archive and the ProgramFiles directory
-$dockerZipPath = Join-Path $PSScriptRoot "\docker-27.5.1.zip"
+$dockerZipPath = Join-Path $PSScriptRoot "\docker-28.0.2.zip"
 $dockerInstallDir = "$Env:ProgramFiles\docker"
 $helloWorldImagePath = Join-Path $PSScriptRoot "\hello-world-image.tar"
 $dockerComposePath = Join-Path $PSScriptRoot "\docker-compose-windows-x86_64.exe"
