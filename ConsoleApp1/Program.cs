@@ -1,15 +1,24 @@
 ﻿using System.Diagnostics;
+using System.Text;
 
 class Program
 {
     static void Main()
     {
-        Console.WriteLine("Starting Process...");
-        string scriptPath = GetScriptPath("install-docker-offline.ps1");
-        //string scriptPath = GetScriptPath("remove-docker.ps1");
-        ExecuteScript(scriptPath);
-        Console.WriteLine("\n\nPress any key to close this window . . .");
-        Console.ReadLine();
+        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "install-result.txt");
+
+        using (StreamWriter writer = new StreamWriter(filePath))
+        using (TextWriter consoleWriter = Console.Out)
+        {
+            Console.SetOut(new MultiTextWriter(consoleWriter, writer));
+
+            Console.WriteLine("Starting Process...");
+            string scriptPath = GetScriptPath("install-docker-offline.ps1");
+            //string scriptPath = GetScriptPath("remove-docker.ps1");
+            ExecuteScript(scriptPath);
+            Console.WriteLine("\n\nPress any key to close this window . . .");
+            Console.ReadLine();
+        }
     }
 
 public static string GetScriptPath(string scriptFileName)
@@ -54,6 +63,31 @@ public static void ExecuteScript(string pathToScript)
 
         // Wait for script execution to complete
         process.WaitForExit();
+    }
+}
+
+class MultiTextWriter : TextWriter
+{
+    private readonly TextWriter _consoleWriter, _fileWriter;
+
+    public MultiTextWriter(TextWriter consoleWriter, TextWriter fileWriter)
+    {
+        _consoleWriter = consoleWriter;
+        _fileWriter = fileWriter;
+    }
+
+    public override Encoding Encoding => _consoleWriter.Encoding;
+
+    public override void WriteLine(string value)
+    {
+        _consoleWriter.WriteLine(value);
+        _fileWriter.WriteLine(value);
+    }
+
+    public override void Write(char value)
+    {
+        _consoleWriter.Write(value);
+        _fileWriter.Write(value);
     }
 }
 
