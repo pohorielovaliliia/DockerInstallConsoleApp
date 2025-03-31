@@ -7,9 +7,10 @@ class Program
     {
         string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "install-result.txt");
 
-        using (StreamWriter writer = new StreamWriter(filePath))
+        using (StreamWriter writer = new StreamWriter(filePath, true))
         using (TextWriter consoleWriter = Console.Out)
         {
+            writer.AutoFlush = true;
             Console.SetOut(new MultiTextWriter(consoleWriter, writer));
 
             Console.WriteLine("Starting Process...");
@@ -80,8 +81,9 @@ class MultiTextWriter : TextWriter
 
     public override void WriteLine(string value)
     {
+        string timestampedValue = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {value}";
         _consoleWriter.WriteLine(value);
-        _fileWriter.WriteLine(value);
+        _fileWriter.WriteLine(timestampedValue);
     }
 
     public override void Write(char value)
