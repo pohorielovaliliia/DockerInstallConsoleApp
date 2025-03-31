@@ -81,7 +81,7 @@ class MultiTextWriter : TextWriter
 
     public override void WriteLine(string value)
     {
-        string timestampedValue = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {value}";
+        string timestampedValue = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {value}";
         _consoleWriter.WriteLine(value);
         _fileWriter.WriteLine(timestampedValue);
     }
